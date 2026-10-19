@@ -1,0 +1,20 @@
+title: Options Pilot
+description: >-
+  A personal research journal on trading options with AI assistance.
+  Nothing on this site is investment advice.
+url: "https://optionspilot.ai"
+author:
+  name: Alain Joaris
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+permalink: /:categories/:year/:month/:title/
+
+header_pages:
+  - journal.md
+  - reports.md
+  - results.md
+  - about.md
