@@ -4,7 +4,7 @@ title: Why the desk stopped trusting a simple ratio
 categories: journal
 ---
 
-Every premium seller learns the same rule of thumb early: collect at least one third of the spread's width in credit. Sell a five-dollar-wide put spread, and you want at least $1.67 for it. Our desk used that rule as its main quality gate. This entry explains why we are replacing it, and why the replacement is not yet allowed to make decisions.
+Every premium seller learns the same rule of thumb early: collect at least one third of the spread's width in credit. Sell a five-dollar-wide put spread, and you want at least $1.67 for it. Our desk used that rule as its main quality gate. This entry explains why we replaced it, and what the replacement has and has not yet proved.
 
 ## The rule stopped producing trades
 
@@ -23,13 +23,15 @@ The desk now estimates that directly. For each candidate it simulates 10,000 pos
 
 The estimator had in fact been built some time ago and left switched off. A review of the code found it sitting unused while every rejection came from the ratio.
 
-## Why it is not in charge yet
+## When it took charge
 
 Switching a model on is easy. Trusting it is a different matter.
 
-Both gates now run side by side. The desk logs every case where they disagree, and only the old gate decides. When we first compared predictions with outcomes, the 16 closed trades in the sample were all winners, and the model's predictions were drifting away from the realised results. A model checked only against winners has told us nothing about the one thing a risk gate exists for: losses.
+For a period both gates ran side by side, the desk logged every case where they disagreed, and only the old gate decided. The new gate took over on 8 August. The evidence for the switch was a comparison over 60 days: 25 candidates passed the new gate but failed the old one, 19 of them closed, all winners, with an average return of about 12% on the capital at risk. In the other direction there were none: the new gate refused nothing the old one accepted. Switching only added trades.
 
-So the promotion rule is explicit. The new gate takes over only once at least 15 trades can be fully reconstructed from the record, and at least one of them is a realised loser. A second condition came out of the same review: at the narrower spread widths we now trade, commissions and fees amount to 6 to 8% of the maximum profit. Predictions and realised results must be compared on the same after-fee basis, or the calibration will chase a bias of several points.
+That evidence had a flaw. A model checked only against winners has told us nothing about the one thing a risk gate exists for: losses. We switched before seeing a losing trade in that sample.
+
+The losses came later. By mid-September the measured population of simulated trades had grown to 390, 64 of them losers (16%), ten closed early by the assignment safeguard. The tail was crossed. The model still predicts a smaller return than the one realised so far, and the gap persists with the losers included. We keep the gate, and we keep measuring that gap. A second lesson from the same review stands: at the narrow spread widths we trade, commissions and fees amount to 6 to 8% of the maximum profit, so predictions and realised results must be compared on the same after-fee basis.
 
 ## What this taught us
 
@@ -39,6 +41,8 @@ A rule of thumb carries the context it was born in. One third of the width makes
 
 Check the data before trusting a reading of the code. The first review was a careful reading of the source. When its conclusions were checked against the trade journal, three of them did not survive.
 
-A model earns its authority with evidence, including evidence of failure. Until then, it watches.
+A model earns its authority with evidence, including evidence of failure. Ours was given authority a little early, and the record says so.
 
-When the new gate takes over, or fails to, the figures will appear on the [Results](/results/) page.
+The figures will appear on the [Results](/results/) page.
+
+*Corrected on 20 October 2026. The first version of this entry said the new gate did not yet decide. It has decided since 8 August; the section "When it took charge" replaces the original.*
